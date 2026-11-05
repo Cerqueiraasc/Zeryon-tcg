@@ -6,6 +6,7 @@
   --navy-deep: #071a3d;
   --flag-green: #009c3b;
   --green: #00843a;
+  --green-strong: #006b2f;
   --green-soft: #e6f4ec;
   --yellow: #ffd21f;
   --yellow-soft: #fff8d6;
@@ -112,7 +113,7 @@ input, select {
   text-align: left;
 }
 .sidebar nav button:hover, .sidebar-bottom > button:hover { background: var(--bg); color: var(--text); }
-.sidebar nav button.selected, .sidebar-bottom > button.selected { background: var(--green-soft); color: var(--green); font-weight: 700; }
+.sidebar nav button.selected, .sidebar-bottom > button.selected { background: var(--green-soft); color: var(--green-strong); font-weight: 700; }
 .nav-short { display: none; }
 .sidebar-bottom { margin-top: auto; }
 .user { display: flex; align-items: center; gap: 10px; margin-top: 10px; padding: 14px 6px 4px; border-top: 1px solid var(--border); }
@@ -202,7 +203,7 @@ footer span:last-child { max-width: 680px; text-align: right; }
   min-height: 44px;
   background: none;
   border: 0;
-  color: var(--green);
+  color: var(--green-strong);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -339,7 +340,7 @@ footer span:last-child { max-width: 680px; text-align: right; }
 .card-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; margin-top: auto; padding-top: 10px; }
 .card-bottom strong { font-size: 15px; overflow-wrap: anywhere; }
 .add-icon { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; background: var(--green); border: 0; border-radius: var(--radius-small); color: #fff; }
-.add-icon:hover { background: #006b2f; }
+.add-icon:hover { background: var(--green-strong); }
 
 /* ---------- Coleções e filtros ---------- */
 .set-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0 0 20px; }
@@ -365,10 +366,10 @@ footer span:last-child { max-width: 680px; text-align: right; }
 .event-body { display: flex; gap: 12px; padding: 16px; }
 .event-body h3 { margin: 2px 0 4px; }
 .event-body p { font-size: 14px; }
-.date-box { display: flex; flex-direction: column; align-items: center; align-self: flex-start; padding: 6px 12px; background: var(--green-soft); border-radius: var(--radius-small); color: var(--green); font-size: 12px; font-weight: 700; }
+.date-box { display: flex; flex-direction: column; align-items: center; align-self: flex-start; padding: 6px 12px; background: var(--green-soft); border-radius: var(--radius-small); color: var(--green-strong); font-size: 12px; font-weight: 700; }
 .date-box strong { font-family: var(--font-title); font-size: 22px; line-height: 1.15; }
 .event-card details { padding: 0 16px 16px; }
-.event-card summary { min-height: 32px; color: var(--green); font-weight: 700; cursor: pointer; }
+.event-card summary { min-height: 32px; color: var(--green-strong); font-weight: 700; cursor: pointer; }
 .event-card details p { margin-top: 8px; font-size: 14px; }
 .event-card ol { margin: 8px 0 0; padding-left: 20px; }
 

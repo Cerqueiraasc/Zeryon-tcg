@@ -20,7 +20,7 @@ describe('visual rules', () => {
   expect(sizes.filter(s => s < 12)).toEqual([]);
  });
  it.each([
-  ['text','bg'],['text','surface'],['text-muted','bg'],['text-muted','surface'],['navy','yellow'],['green','surface'],['text','yellow-soft'],['green','green-soft'],
+  ['text','bg'],['text','surface'],['text-muted','bg'],['text-muted','surface'],['navy','yellow'],['green','surface'],['text','yellow-soft'],['green-strong','green-soft'],['green-strong','bg'],
  ])('meets contrast AA: %s on %s', (a, b) => {
   expect(contrast(token(a), token(b))).toBeGreaterThanOrEqual(4.5);
  });
