@@ -1,0 +1,11 @@
+import { useEffect, useRef, useState } from 'react';
+import { Camera, ScanLine } from 'lucide-react';
+import { Button } from '../atoms/Button';
+import { cards } from '../../data/catalog';
+import type { Card } from '../../types';
+export function Scanner({onSelect}: {onSelect:(card:Card)=>void}) {
+ const video=useRef<HTMLVideoElement>(null); const stream=useRef<MediaStream|null>(null);const mounted=useRef(true);const [error,setError]=useState('');const [active,setActive]=useState(false);const [pending,setPending]=useState(false);const [selected,setSelected]=useState(cards[0].id);
+ useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;stream.current?.getTracks().forEach(t=>t.stop())}},[]);
+ async function start(){setPending(true);setError('');try{if(!navigator.mediaDevices?.getUserMedia) throw new Error('unsupported');const capture=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});if(!mounted.current){capture.getTracks().forEach(t=>t.stop());return}stream.current=capture;if(video.current){video.current.srcObject=capture;await video.current.play()}if(mounted.current)setActive(true)}catch{stream.current?.getTracks().forEach(t=>t.stop());if(mounted.current)setError('Câmera indisponível. Verifique a permissão e use HTTPS ou localhost. Você também pode selecionar a carta abaixo.')}finally{if(mounted.current)setPending(false)}}
+ return <div className="scanner"><div className="camera-window"><video ref={video} playsInline muted/><ScanLine size={72}/>{!active&&<span>Aproxime sua carta da câmera</span>}</div><p className="notice">Protótipo: a câmera funciona como visualização. A identificação automática por imagem ainda não está integrada. Selecione a carta para demonstrar o fluxo.</p>{error&&<p role="alert">{error}</p>}<Button variant="secondary" onClick={start} disabled={active||pending}><Camera size={17}/>{pending?'Solicitando câmera…':active?'Câmera ativa':'Ativar câmera'}</Button><label>Carta identificada na demonstração<select value={selected} onChange={e=>setSelected(e.target.value)}>{cards.map(c=><option key={c.id} value={c.id}>{c.name} · {c.number}</option>)}</select></label><Button onClick={()=>onSelect(cards.find(c=>c.id===selected)!)}>Ver carta selecionada</Button></div>
+}

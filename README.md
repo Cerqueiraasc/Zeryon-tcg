@@ -1,0 +1,71 @@
+# Minha Coleção — Pokémon TCG
+
+MVP educacional em React + TypeScript, preparado para a apresentação de **22 de novembro de 2026**. Interface responsiva, com identidade visual própria em verde e tons naturais.
+
+## Executar
+
+Requer Node.js 22 ou superior.
+
+```sh
+npm install
+npm run dev
+```
+
+Abra o endereço exibido pelo Vite (normalmente http://localhost:5173).
+
+```sh
+npm run build
+npm run preview
+npm test
+```
+
+## O que funciona
+
+- Dashboard com totais calculados a partir da coleção real do usuário.
+- Catálogo demonstrativo de 12 cartas, em três coleções; busca, filtros por coleção, posse e favoritas e ordenação por nome ou valor.
+- Cadastro de cartas do catálogo com quantidade, condição, idioma e edição; remoção pelo detalhe da carta.
+- Favoritos independentes da posse, detalhes das cartas e checklist de cartas faltantes.
+- Perfil com progresso no **catálogo reduzido**, favoritos e histórico dos registros de adição.
+- Persistência local, exportação e restauração de backup JSON validado antes de substituir a coleção.
+- Câmera do aparelho com permissão, encerramento da captura ao fechar e seleção manual para simular a identificação.
+- Exibição de valores em BRL, USD e JPY com conversão fixa explicitamente demonstrativa.
+- Agenda fictícia com informações e resultados de exemplo.
+
+## Atomic Design
+
+```text
+src/
+  components/
+    atoms/       Button, Badge
+    molecules/   CardTile, StatCard
+    organisms/   Modal, Scanner
+    templates/   AppLayout
+  pages/         App: páginas e composição dos fluxos
+  data/          Catálogo demonstrativo
+  services/      Persistência, validação e formatação
+  types/         Modelos TypeScript
+```
+
+O estado de domínio fica na página principal e é passado por propriedades aos componentes. Não há backend nem autenticação: a coleção pertence ao navegador e dispositivo usados. A restauração de backup substitui os dados locais existentes.
+
+## Limites deliberados do MVP
+
+**O scanner não reconhece cartas automaticamente.** A câmera fornece visualização real e o usuário seleciona uma carta para demonstrar a etapa de confirmação. Reconhecimento exige uma integração de visão/OCR e correspondência com um catálogo, com validação de acurácia.
+
+**Preços, conversões e campeonatos são fictícios.** Não há conexão com eBay, Mercado Livre ou outras fontes, histórico de preço nem cálculo por condição/idioma/edição. Não usar os valores como referência de compra ou venda.
+
+O catálogo contém apenas 12 cartas e os progressos se referem a esse recorte, não às coleções oficiais completas. O cadastro manual está limitado a essas cartas. A interface está em português; o idioma da carta é um campo separado. Tradução da interface, login, sincronização e catálogo completo são próximas etapas.
+
+Imagens de cartas são carregadas externamente de `images.pokemontcg.io`; fontes usam Google Fonts com alternativa local do sistema. A exibição das imagens precisa de internet. As ilustrações das cartas estão em inglês e não mudam conforme o idioma cadastrado.
+
+## Roteiro para apresentar
+
+1. Abra a visão geral e explique o objetivo do aplicativo.
+2. Explore coleções e adicione uma carta pelo botão +.
+3. Abra os detalhes de outra carta e cadastre duas cópias com idioma e condição.
+4. Confira os totais na visão geral e filtre a sua coleção.
+5. Marque uma favorita e mostre o checklist de faltantes e o perfil.
+6. Abra o scanner, permita a câmera e explique a identificação demonstrativa.
+7. Mude a moeda nas configurações, exporte o backup e recarregue para mostrar persistência.
+
+A câmera requer `localhost` ou HTTPS. Acesso por IP da rede local em HTTP no celular pode bloquear a câmera. Verifique a conexão e as permissões antes da apresentação. Projeto independente, sem afiliação à The Pokémon Company; marcas e ilustrações pertencem aos seus respectivos titulares.
