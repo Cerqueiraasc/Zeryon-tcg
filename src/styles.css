@@ -2,6 +2,7 @@
 
 /* ---------- Variáveis ---------- */
 :root {
+  color-scheme: light;
   --navy: #002776;
   --navy-deep: #071a3d;
   --flag-green: #009c3b;
@@ -24,6 +25,40 @@
   --font-body: 'DM Sans', system-ui, sans-serif;
   --sidebar-width: 256px;
 }
+
+/* Tema escuro: superfícies, textos e controles compartilham a mesma paleta. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --navy: #b4ceff;
+  --green-strong: #7de3a1;
+  --green-soft: #173b2d;
+  --yellow-soft: #37301b;
+  --yellow-line: #75632e;
+  --bg: #0b1220;
+  --surface: #111b2b;
+  --text: #e6edf8;
+  --text-muted: #abbad0;
+  --border: #33445e;
+  --danger: #ff9c96;
+  --shadow: 0 8px 24px rgba(0, 0, 0, .35);
+}
+:root[data-theme='dark'] .button.primary { color: #071a3d; }
+:root[data-theme='dark'] .home-stats,
+:root[data-theme='dark'] .event-cover,
+:root[data-theme='dark'] .toast,
+:root[data-theme='dark'] .avatar { background: #193563; }
+:root[data-theme='dark'] .avatar-option .avatar { background: var(--bg); }
+:root[data-theme='dark'] .card-art { background: #1c293b; }
+:root[data-theme='dark'] .type-Água { background: #172f47; }
+:root[data-theme='dark'] .type-Planta { background: #18372b; }
+:root[data-theme='dark'] .type-Elétrico { background: #39341d; }
+:root[data-theme='dark'] .type-Fogo { background: #3c2929; }
+:root[data-theme='dark'] .type-Escuridão,
+:root[data-theme='dark'] .type-Psíquico { background: #2c2540; }
+:root[data-theme='dark'] .favorite { background: var(--surface); }
+:root[data-theme='dark'] .add-icon:hover { background: #006b2f; }
+:root[data-theme='dark'] .home-search:focus-within { box-shadow: 0 0 0 3px rgba(180, 206, 255, .25); }
+:root[data-theme='dark'] dialog::backdrop { background: rgba(0, 0, 0, .75); }
 
 /* ---------- Base ---------- */
 * { box-sizing: border-box; }
@@ -393,6 +428,7 @@ label input, label select { font-weight: 400; }
 
 /* ---------- Janelas ---------- */
 dialog {
+  background: var(--surface);
   width: calc(100% - 32px);
   max-width: 760px;
   max-height: 90vh;
@@ -528,6 +564,79 @@ dialog::backdrop { background: rgba(7, 26, 61, .65); }
   .detail { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .detail > img { max-height: 290px; }
   .camera-window { height: 220px; }
+}
+
+.character-avatar { flex-shrink: 0; overflow: hidden; }
+.character-avatar img { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+.avatar-edit { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; padding: 0; border: 0; background: transparent; color: var(--navy); font-size: 12px; font-weight: 700; }
+.avatar-edit:hover .avatar { outline: 3px solid var(--yellow); outline-offset: 3px; }
+.sidebar-bottom > .profile-shortcut { display: flex; width: 100%; border-top: 1px solid var(--border); border-radius: 0; padding: 20px 0; text-align: left; gap: 12px; }
+.profile-shortcut .avatar { color: var(--yellow); }
+.avatar-picker > p { font-size: 14px; line-height: 1.6; }
+.avatar-preview { display: flex; align-items: center; gap: 18px; padding: 18px; margin: 18px 0; border-radius: 12px; background: var(--bg); }
+.avatar-preview strong { color: var(--navy); font-size: 20px; }
+.avatar-preview p { font-size: 13px; margin-top: 6px; }
+.avatar-default { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); font-size: 13px; color: var(--text-muted); }
+.avatar-default[aria-pressed=true] { border-color: var(--green); color: var(--green-strong); background: var(--green-soft); }
+.avatar-category { margin-top: 22px; }
+.avatar-category h3 { font-size: 15px; margin-bottom: 12px; }
+.avatar-options { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.avatar-option { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 5px; min-width: 0; border: 2px solid var(--border); background: var(--surface); border-radius: 10px; font-size: 12px; color: var(--text); }
+.avatar-option .avatar { width: 58px; height: 58px; background: var(--bg); }
+.avatar-option:hover { border-color: var(--navy); background: var(--bg); }
+.avatar-option.chosen { border-color: var(--green); background: var(--green-soft); }
+.avatar-check { position: absolute; top: 5px; right: 5px; color: var(--green-strong); }
+.avatar-picker-actions { position: sticky; bottom: -26px; display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid var(--border); padding: 16px 0 4px; margin-top: 24px; background: var(--surface); }
+@media (max-width: 680px) {
+ .avatar-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+ .avatar-picker-actions { bottom: -16px; }
+ .avatar-picker-actions .button { flex: 1; }
+}
+
+/* Marketplace e comunidade */
+.market-intro { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+.market-intro h2 { margin: 10px 0 8px; }
+.market-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 24px 0; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.market-tabs button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text-muted); font-size: 14px; font-weight: 600; }
+.market-tabs button.active { background: var(--green-soft); border-color: var(--green); color: var(--green-strong); }
+.market-checkbox { display: flex; flex-direction: row; align-items: center; gap: 8px; width: fit-content; }
+.market-checkbox input { width: 20px; min-height: 20px; height: 20px; accent-color: var(--green); }
+.market-listing h3 { margin: 10px 0 4px; }
+.market-listing .card-info > p { font-size: 13px; margin-bottom: 4px; }
+.market-listing .card-info > .button { margin-top: auto; width: 100%; }
+.market-seller { display: flex; align-items: center; gap: 9px; width: 100%; min-height: 52px; padding: 9px 0; margin: 10px 0; text-align: left; background: transparent; border: 0; color: var(--navy); font-size: 13px; }
+.market-seller small { display: block; color: var(--text-muted); font-size: 12px; }
+.market-seller:hover { text-decoration: underline; }
+.market-price { display: flex; flex-direction: column; gap: 4px; margin: 12px 0 18px; }
+.market-price strong { font-size: 22px; color: var(--navy); }
+.market-price small { color: var(--text-muted); }
+.players-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 16px; }
+.player-card { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 24px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); text-align: center; }
+.player-card > p { font-size: 14px; }
+.player-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 10px; width: 100%; }
+.player-detail { border: 0; padding: 10px; }
+.market-orders { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+.market-order { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.market-order img { width: 60px; height: 84px; object-fit: contain; }
+.market-order h3 { margin: 8px 0 4px; }
+.market-order p { font-size: 13px; }
+.market-order > strong { margin-left: auto; white-space: nowrap; }
+textarea { width: 100%; padding: 12px; font: inherit; background: var(--surface); color: var(--text); border: 1px solid #8a97ad; border-radius: 8px; resize: vertical; }
+textarea:focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+@media (max-width:680px) {
+ .sidebar nav button { font-size: 12px; }
+ .market-intro { flex-direction: column; align-items: stretch; padding: 18px; }
+ .market-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+ .market-tabs button { font-size: 12px; padding: 8px; }
+ .market-seller { font-size: 12px; }
+ .market-seller .avatar { width: 28px; height: 28px; }
+ .market-seller small { font-size: 12px; }
+ .market-listing .button { font-size: 13px; padding: 8px; }
+ .market-listing .card-info > p { font-size: 12px; }
+ .market-price strong { font-size: 18px; }
+ .market-price small { font-size: 12px; }
+ .market-order { flex-wrap: wrap; gap: 12px; }
+ .market-order > strong { margin-left: 72px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

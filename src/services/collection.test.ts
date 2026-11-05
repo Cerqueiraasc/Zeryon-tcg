@@ -10,6 +10,12 @@ describe('collection backup validation',()=>{
  });
  it.each([null,{}, {entries:[null],favorites:[]},{entries:[{cardId:'x',quantity:-1}],favorites:[]},{entries:[],favorites:[7]}])('rejects malformed backups before replacing data: %j',(value)=>{expect(()=>parseCollection(value)).toThrow()});
  it('accepts an empty backup',()=>{expect(parseCollection(emptyState)).toEqual(emptyState)});
+ it.each(['light','dark'] as const)('restores the %s theme',theme=>{expect(parseCollection({...emptyState,settings:{...emptyState.settings,theme}}).settings.theme).toBe(theme)});
+ it('keeps backups without a theme compatible',()=>{expect(parseCollection(emptyState).settings.theme).toBeUndefined()});
+ it.each(['invalid',null,123])('ignores invalid theme preferences: %j',theme=>{expect(parseCollection({...emptyState,settings:{...emptyState.settings,theme}}).settings.theme).toBeUndefined()});
+ it('restores a selected avatar with the collection',()=>{expect(parseCollection({...emptyState,avatarId:'pikachu'}).avatarId).toBe('pikachu')});
+ it('keeps older backups without an avatar compatible',()=>{expect(parseCollection({entries:[],favorites:[],settings:emptyState.settings}).avatarId).toBeUndefined()});
+ it.each(['unknown','../../file',123,null])('falls back safely for an invalid avatar: %j',avatarId=>{expect(parseCollection({...emptyState,avatarId}).avatarId).toBeUndefined()});
  it('formats the explicitly fixed demo conversions',()=>{expect(formatMoney(100,'USD')).toContain('20,00');expect(formatMoney(100,'JPY')).toContain('3.000')});
 });
 
