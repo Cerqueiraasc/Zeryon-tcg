@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addEntry, clampQuantity, emptyState, formatMoney, lastDetails, parseCollection, searchCards, storageKey } from './collection';
+import { addEntry, cardThumbnail, clampQuantity, emptyState, formatMoney, lastDetails, parseCollection, searchCards, storageKey } from './collection';
 import { cards } from '../data/catalog';
 import { defaultDetails } from '../data/options';
 describe('collection backup validation',()=>{
@@ -39,6 +39,9 @@ describe('lastDetails',()=>{
  it('uses the last entry',()=>{expect(lastDetails({...emptyState,entries:[{...entry,condition:'Jogada'}]})).toEqual({condition:'Jogada',language:'Inglês',edition:'Holográfica'})});
  it('defaults when empty',()=>{expect(lastDetails(emptyState)).toEqual(defaultDetails)});
  it('ignores unknown options from restored backups',()=>{expect(lastDetails({...emptyState,entries:[{...entry,condition:'Excelente'}]})).toEqual(defaultDetails)});
+});
+describe('cardThumbnail',()=>{
+ it('uses the lighter image in lists',()=>{expect(cardThumbnail('https://images.pokemontcg.io/swsh12pt5gg/GG70_hires.png')).toBe('https://images.pokemontcg.io/swsh12pt5gg/GG70.png')});
 });
 describe('clampQuantity',()=>{
  it.each([[NaN,1],[0,1],[-3,1],[2.5,2],[1,1],[999,999],[1000,999]])('%s becomes %s',(input,expected)=>{expect(clampQuantity(input)).toBe(expected)});

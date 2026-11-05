@@ -428,6 +428,7 @@ dialog::backdrop { background: rgba(7, 26, 61, .65); }
 .add-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
 .add-rows .add-quantity { grid-column: 1 / -1; }
 .add-rows label { margin: 8px 0; }
+.field { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin: 8px 0; font-size: 14px; font-weight: 600; }
 .add-note { margin: 10px 0 8px; color: var(--text-muted); font-size: 13px; }
 .stepper { display: inline-flex; align-items: center; gap: 6px; }
 .stepper button { display: grid; place-items: center; width: 44px; height: 44px; background: var(--surface); border: 1px solid #8a97ad; border-radius: var(--radius-small); color: var(--navy); }
@@ -495,8 +496,9 @@ dialog::backdrop { background: rgba(7, 26, 61, .65); }
   .page-heading { flex-direction: column; align-items: flex-start; margin-bottom: 16px; }
   .home-search input { font-size: 16px; }
   .home-tools .button { padding: 10px 8px; font-size: 15px; }
-  .stat { padding: 0 8px; }
-  .stat strong { font-size: 18px; }
+  .home-stats { grid-template-columns: minmax(0, .8fr) minmax(0, .8fr) minmax(0, 1.6fr); }
+  .stat { padding: 0 10px; }
+  .stat strong { font-size: 17px; }
   .stat span { font-size: 12px; }
   .cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .card-art { height: 200px; padding: 10px; }

@@ -1,6 +1,8 @@
-# Minha Coleção — Pokémon TCG
+# Zeryon TCG
 
-MVP educacional em React + TypeScript, preparado para a apresentação de **22 de novembro de 2026**. Interface responsiva, com identidade visual própria em verde e tons naturais.
+**Seu universo TCG em um só lugar.**
+
+MVP educacional em React + TypeScript para colecionadores de cartas Pokémon, preparado para a apresentação de **22 de novembro de 2026**. Interface responsiva, com identidade visual própria em verde, amarelo e azul, inspirada na bandeira do Brasil. A logo fica em `public/brand/`.
 
 ## Executar
 
@@ -21,9 +23,9 @@ npm test
 
 ## O que funciona
 
-- Dashboard com totais calculados a partir da coleção real do usuário.
+- Tela inicial com busca, botões de adicionar e escanear e totais calculados a partir da coleção real do usuário.
 - Catálogo demonstrativo de 12 cartas, em três coleções; busca, filtros por coleção, posse e favoritas e ordenação por nome ou valor.
-- Cadastro de cartas do catálogo com quantidade, condição, idioma e edição; remoção pelo detalhe da carta.
+- Cadastro em janela rápida, com quantidade, condição, idioma e edição já preenchidos pela última adição; remoção pelo detalhe da carta.
 - Favoritos independentes da posse, detalhes das cartas e checklist de cartas faltantes.
 - Perfil com progresso no **catálogo reduzido**, favoritos e histórico dos registros de adição.
 - Persistência local, exportação e restauração de backup JSON validado antes de substituir a coleção.
@@ -36,17 +38,17 @@ npm test
 ```text
 src/
   components/
-    atoms/       Button, Badge
+    atoms/       Button, Badge, Logo, QuantityStepper
     molecules/   CardTile, StatCard
-    organisms/   Modal, Scanner
+    organisms/   Modal, Scanner, AddCardSheet
     templates/   AppLayout
-  pages/         App: páginas e composição dos fluxos
-  data/          Catálogo demonstrativo
+  pages/         App: páginas e composição dos fluxos; HomePage: tela inicial
+  data/          Catálogo demonstrativo e opções de cadastro
   services/      Persistência, validação e formatação
   types/         Modelos TypeScript
 ```
 
-O estado de domínio fica na página principal e é passado por propriedades aos componentes. Não há backend nem autenticação: a coleção pertence ao navegador e dispositivo usados. A restauração de backup substitui os dados locais existentes.
+O estado de domínio fica na página principal e é passado por propriedades aos componentes. Não há backend nem autenticação: a coleção pertence ao navegador e dispositivo usados. A restauração de backup substitui os dados locais existentes. A chave `minha-colecao:v1` foi mantida de propósito para preservar as coleções salvas antes da mudança de nome.
 
 ## Limites deliberados do MVP
 
@@ -60,12 +62,12 @@ Imagens de cartas são carregadas externamente de `images.pokemontcg.io`; fontes
 
 ## Roteiro para apresentar
 
-1. Abra a visão geral e explique o objetivo do aplicativo.
-2. Explore coleções e adicione uma carta pelo botão +.
-3. Abra os detalhes de outra carta e cadastre duas cópias com idioma e condição.
-4. Confira os totais na visão geral e filtre a sua coleção.
+1. Abra a tela inicial e explique o objetivo do aplicativo.
+2. Busque uma carta na tela inicial, toque no + e confirme na janela rápida.
+3. Toque em "Adicionar carta", busque outra e cadastre duas cópias com idioma e condição.
+4. Confira os totais na tela inicial e filtre a sua coleção.
 5. Marque uma favorita e mostre o checklist de faltantes e o perfil.
 6. Abra o scanner, permita a câmera e explique a identificação demonstrativa.
 7. Mude a moeda nas configurações, exporte o backup e recarregue para mostrar persistência.
 
-A câmera requer `localhost` ou HTTPS. Acesso por IP da rede local em HTTP no celular pode bloquear a câmera. Verifique a conexão e as permissões antes da apresentação. Projeto independente, sem afiliação à The Pokémon Company; marcas e ilustrações pertencem aos seus respectivos titulares.
+A câmera requer `localhost` ou HTTPS. Acesso por IP da rede local em HTTP no celular pode bloquear a câmera. Verifique a conexão e as permissões antes da apresentação. Zeryon TCG é um projeto independente, sem afiliação à The Pokémon Company; marcas e ilustrações pertencem aos seus respectivos titulares.

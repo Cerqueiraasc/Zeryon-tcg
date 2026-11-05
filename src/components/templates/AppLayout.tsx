@@ -31,7 +31,7 @@ export function AppLayout({page,onNavigate,onScan,children}: {page:Page;onNaviga
     <div className="topbar-actions">
      <span className="demo-pill"><i/> MVP · Demonstração</span>
      <button className="icon-button" aria-label="Configurações" onClick={() => onNavigate('settings')}><Settings size={20}/></button>
-     <Button onClick={onScan} aria-label="Escanear carta"><ScanLine size={20}/><span className="topbar-scan-label">Escanear carta</span></Button>
+     {page!=='home'&&<Button onClick={onScan} aria-label="Escanear carta"><ScanLine size={20}/><span className="topbar-scan-label">Escanear carta</span></Button>}
     </div>
    </header>
    <main>{children}</main>

@@ -35,3 +35,4 @@ export function searchCards(list: Card[], query: string): Card[] {
  const q = normalize(query);
  return list.filter(c => normalize(`${c.name} ${c.number} ${c.rarity} ${c.set}`).includes(q));
 }
+export const cardThumbnail = (image: string) => image.replace('_hires', '');
