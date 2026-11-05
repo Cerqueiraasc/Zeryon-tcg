@@ -1,6 +1,44 @@
-import { BookOpen, LayoutDashboard, Layers3, Trophy, UserRound, Settings, ScanLine, ArrowUpRight, Leaf } from 'lucide-react';
+import { BookOpen, LayoutDashboard, Layers3, Trophy, UserRound, Settings, ScanLine } from 'lucide-react';
 import type { ReactNode } from 'react';
 import type { Page } from '../../types';
 import { Button } from '../atoms/Button';
-const nav = [{id:'home',label:'Visão geral',icon:LayoutDashboard},{id:'collection',label:'Minha coleção',icon:BookOpen},{id:'sets',label:'Explorar coleções',icon:Layers3},{id:'events',label:'Campeonatos',icon:Trophy},{id:'profile',label:'Meu perfil',icon:UserRound}] as const;
-export function AppLayout({page,onNavigate,onScan,children}: {page:Page;onNavigate:(p:Page)=>void;onScan:()=>void;children:ReactNode}) {return <div className="app-shell"><aside className="sidebar"><a href="#" className="brand" onClick={e=>{e.preventDefault();onNavigate('home')}}><span className="brand-icon">◒</span><span>minha coleção<small>POKÉMON TCG</small></span></a><div className="workspace-label">SEU ESPAÇO DE COLECIONADOR</div><nav>{nav.map(n=><button key={n.id} onClick={()=>onNavigate(n.id)} className={page===n.id?'selected':''}><n.icon size={19}/>{n.label}{n.id==='collection'&&<span className="nav-dot"/>}</button>)}</nav><div className="sidebar-tip"><Leaf size={24}/><strong>Grandes coleções<br/>começam com uma carta.</strong><p>Descubra, organize e dê o próximo passo na sua jornada.</p><button onClick={()=>onNavigate('sets')}>Explore as coleções <ArrowUpRight size={15}/></button></div><div className="sidebar-bottom"><button onClick={()=>onNavigate('settings')}><Settings size={18}/> Configurações</button><div className="user"><span className="avatar">T</span><div><strong>Treinador</strong><small>Colecionador Pokémon</small></div><span className="online"/></div></div></aside><div className="main-shell"><header className="topbar"><span>Seu universo Pokémon, <strong>em um só lugar.</strong></span><div><button className="icon-button" aria-label="Configurações" onClick={()=>onNavigate('settings')}><Settings size={18}/></button><span className="demo-pill"><i/> MVP · Demonstração</span><Button onClick={onScan}><ScanLine size={17}/> Escanear carta</Button></div></header><main>{children}</main><footer>Feito para quem coleciona histórias. <span>Projeto educacional independente · Pokémon pertence aos respectivos titulares.</span></footer></div></div>}
+import { Logo } from '../atoms/Logo';
+const nav = [
+ {id:'home',label:'Visão geral',short:'Início',icon:LayoutDashboard},
+ {id:'collection',label:'Minha coleção',short:'Coleção',icon:BookOpen},
+ {id:'sets',label:'Explorar coleções',short:'Explorar',icon:Layers3},
+ {id:'events',label:'Campeonatos',short:'Eventos',icon:Trophy},
+ {id:'profile',label:'Meu perfil',short:'Perfil',icon:UserRound},
+] as const;
+export function AppLayout({page,onNavigate,onScan,children}: {page:Page;onNavigate:(p:Page)=>void;onScan:()=>void;children:ReactNode}) {
+ const goHome = (e: React.MouseEvent) => { e.preventDefault(); onNavigate('home'); };
+ return <div className="app-shell">
+  <aside className="sidebar">
+   <a href="#" className="brand" onClick={goHome}><Logo size={46} showTagline/></a>
+   <nav aria-label="Principal">
+    {nav.map(n => <button key={n.id} onClick={() => onNavigate(n.id)} className={page === n.id ? 'selected' : ''} aria-current={page === n.id ? 'page' : undefined}>
+     <n.icon size={20}/><span className="nav-label">{n.label}</span><span className="nav-short">{n.short}</span>
+    </button>)}
+   </nav>
+   <div className="sidebar-bottom">
+    <button onClick={() => onNavigate('settings')} className={page === 'settings' ? 'selected' : ''}><Settings size={20}/> Configurações</button>
+    <div className="user"><span className="avatar">T</span><div><strong>Treinador</strong><small>Colecionador</small></div></div>
+   </div>
+  </aside>
+  <div className="main-shell">
+   <header className="topbar">
+    <a href="#" className="topbar-brand" onClick={goHome}><Logo size={36} variant="small"/></a>
+    <div className="topbar-actions">
+     <span className="demo-pill"><i/> MVP · Demonstração</span>
+     <button className="icon-button" aria-label="Configurações" onClick={() => onNavigate('settings')}><Settings size={20}/></button>
+     <Button onClick={onScan}><ScanLine size={18}/> Escanear carta</Button>
+    </div>
+   </header>
+   <main>{children}</main>
+   <footer>
+    <span>Zeryon TCG · Seu universo TCG em um só lugar</span>
+    <span>Zeryon TCG é um projeto educacional independente, sem afiliação à The Pokémon Company. Pokémon e as ilustrações das cartas pertencem aos respectivos titulares.</span>
+   </footer>
+  </div>
+ </div>;
+}
